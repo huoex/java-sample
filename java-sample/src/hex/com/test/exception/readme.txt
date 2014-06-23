@@ -33,4 +33,4 @@ PQ002
 对于异常要么处理（try catch），要么接着抛（throws）
 
 PQ003
-
+PQ004
