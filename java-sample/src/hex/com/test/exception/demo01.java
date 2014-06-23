@@ -4,7 +4,9 @@ public class demo01 {
 	public static void main(String[] args) {
 //		testException1();
 //		testException2();
-		testException3();
+//		testException3();
+		testException4();
+//		testException5();
 	}
 	
 	/**
@@ -38,5 +40,21 @@ public class demo01 {
 			System.out.println("数组越界错误");
 		}
 		System.out.println("异常出现后");
+	}
+	
+	/**
+	 * 不try catch，或throws也不报错
+	 * 
+	 */
+	public static void testException4() throws myruntimeexception{
+		
+	}
+	
+	/**
+	 * 强制try catch，或throws
+	 * 
+	 */
+	public static void testException5() throws myexception{
+		
 	}
 }
