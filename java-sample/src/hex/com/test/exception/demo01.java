@@ -5,8 +5,9 @@ public class demo01 {
 //		testException1();
 //		testException2();
 //		testException3();
-		testException4();
+//		testException4();
 //		testException5();
+		testException6("abc");
 	}
 	
 	/**
@@ -56,5 +57,15 @@ public class demo01 {
 	 */
 	public static void testException5() throws myexception{
 		
+	}
+	
+	/**
+	 * try catch，runtimeexception
+	 * 
+	 */
+	public static void testException6(String parm1){
+		if(!parm1.equals("null")){
+			throw new myruntimeexception("parm is not null");
+		}
 	}
 }

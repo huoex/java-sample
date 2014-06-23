@@ -1,7 +1,7 @@
 QA001
 RuntimeException需要try catch吗？
 
-语法上肯定是没有问题的。
+java 编译器允许不catch
 
 QA002
 接到一个异常，如何判断是要处理，还是要往上抛？
@@ -22,6 +22,22 @@ public returnType methodName(args) throws YourException{
 这些异常是引发unchecked Exception的主要原因，编译器不会提示，
 但是你也可以使用try catch来捕捉处理。通常API文档都会提示可能会抛出的
 runtimeException，那在写代码的时候就要小心处理了。
+
+QA004
+Exception和继承自Exception的RuntimeException有什么区别
+
+Java compiler要求所有的Exception 要么被catch,要么被throw，
+除非这是一个RuntimeExeption (e instanceof RuntimeException)。
+也就是说，通常的Exception一定要被处理，也即我们所说的 checked exception，
+而RuntimeException不强制要求处理，（当然你自己要处理也可以），
+所以我们称为unchecked exception。
+
+RuntimeException一般由JVM抛出，即即使你不检查，JVM也会在运行时检查到并抛出  。
+
+RuntimeException 是属于unchecked （java 编译器允许不catch）表示一类 未知的不确定的
+只有在运行时才会出现的异常。 
+而非RuntimeException 是checked （java 编译器必须要求 catch），大概指一类可以预知的，
+当发生异常后知道如何处理的异常，所以需要捕获。 
 
 PQ001
 异常的种类

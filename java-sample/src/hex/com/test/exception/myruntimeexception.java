@@ -18,4 +18,9 @@ public class myruntimeexception  extends RuntimeException{
 		this.replaceMap = replaceStringMap;
 	}
 	
+	public myruntimeexception(String paramMessageId){
+		super(paramMessageId);
+		this.messageId = paramMessageId;
+	}
+	
 }
