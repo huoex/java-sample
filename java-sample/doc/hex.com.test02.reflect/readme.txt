@@ -1,0 +1,2 @@
+QA001
+通过变量获取变量的Getter/Setter方法
