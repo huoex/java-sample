@@ -1,4 +1,4 @@
-package hex.com.test.exception;
+package hex.com.test01.exception;
 
 public class demo01 {
 	public static void main(String[] args) {

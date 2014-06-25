@@ -1,4 +1,4 @@
-package hex.com.test.exception;
+package hex.com.test01.exception;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,4 +23,11 @@ public class myruntimeexception  extends RuntimeException{
 		this.messageId = paramMessageId;
 	}
 	
+	public String getMessageId() {
+		return messageId;
+	}
+
+	public Map<String, Object> getReplaceMap() {
+		return replaceMap;
+	}
 }
