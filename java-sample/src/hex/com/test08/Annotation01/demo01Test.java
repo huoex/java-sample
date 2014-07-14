@@ -1,7 +1,5 @@
 package hex.com.test08.Annotation01;
 
-import static org.junit.Assert.*;
-
 import java.util.Map;
 
 import org.junit.Test;
@@ -15,7 +13,7 @@ public class demo01Test {
 		dd.callme();
 	}
 
-	public static Object setFieldsNewInstance(Class cl, Map map)
+	public static Object setFieldsNewInstance(Class<?> cl, Map map)
 			throws InstantiationException, IllegalAccessException
 
 	{
