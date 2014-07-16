@@ -3,7 +3,8 @@ package hex.com.test11.injection;
 import java.lang.reflect.Field;
 
 /**
- * 依赖注入
+ * 依赖注入 
+ * 通过反射设值实例字段（field）的值
  * 
  * @author hex
  * 
@@ -11,6 +12,7 @@ import java.lang.reflect.Field;
 public class demo {
 	public static void main(String[] args) {
 		A a = new A();
+		// 通过反射设值实例字段（field）的值
 		injection(a);
 		a.call();
 	}

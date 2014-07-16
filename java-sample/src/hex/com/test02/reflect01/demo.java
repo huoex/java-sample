@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
- * 反射
+ * 通过反射调用实例的方法
  * <pre>
  * 1，通过反射调用无参方法
  * 2，通过反射调用有参方法
@@ -19,6 +19,7 @@ public class demo {
 			IllegalAccessException, SecurityException, NoSuchMethodException,
 			IllegalArgumentException, InvocationTargetException {
 
+		// 通过java.lang.Class的newInstance反射调用构建实例
 		Object obj = A.class.newInstance();
 
 		// 1，通过反射调用无参方法
