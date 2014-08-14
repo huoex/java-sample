@@ -13,7 +13,7 @@ import java.util.List;
  *@version 1.00 
  *@author huoex
  */
-public class demo01 {
+public class listIterator {
 	public static void main(String[] args) {
 		List<String> ls = new ArrayList<String>();
 		ls.add("a0");

@@ -16,7 +16,7 @@ import java.util.Map;
  * <pre>
  * @version 1.00
  */
-public class demo02 {
+public class mapIterator {
 	public static void main(String[] args) {
 
 		Map<String, String> map = new HashMap<String, String>();
