@@ -3,7 +3,7 @@ package hex.com.test14.dom;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -75,7 +75,7 @@ public class MyXMLReader extends DefaultHandler {
 
 	/**
 	 * DOM方式
-	 * 
+	 * 使用XMLInputFactory，XMLStreamReader，解析XML文件 
 	 * @author hex
 	 * @date 2014-8-17
 	 * @return void
@@ -104,10 +104,25 @@ public class MyXMLReader extends DefaultHandler {
 				}
 				// System.out.println("-------------------------------------------------");
 			}
-		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (XMLStreamException e) {
 			e.printStackTrace();
+		} finally{
+			if(null !=reader){
+				try {
+					reader.close();
+				} catch (XMLStreamException e) {
+					e.printStackTrace();
+				}
+			}
+			if(null != stream){
+				try {
+					stream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		System.out.println("DOM2 RUNTIME："
 				+ (System.currentTimeMillis() - lasting) + " MS");
