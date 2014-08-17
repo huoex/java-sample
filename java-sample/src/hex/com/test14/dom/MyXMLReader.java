@@ -1,5 +1,9 @@
 package hex.com.test14.dom;
+
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -7,6 +11,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
 
 import org.dom4j.io.SAXReader;
 import org.jdom.Element;
@@ -20,21 +27,25 @@ import org.xml.sax.helpers.DefaultHandler;
 
 /**
  * {@link}http://www.iteye.com/topic/181865
+ * 
  * @author Administrator
- *
+ * 
  */
 public class MyXMLReader extends DefaultHandler {
 
 	java.util.Stack tags = new java.util.Stack();
+
 	public MyXMLReader() {
 		super();
 	}
+
 	/**
 	 * DOM方式
-	* @since V2.0
-	* @author David.Wei
-	* @date 2008-4-11
-	* @return void
+	 * 
+	 * @since V2.0
+	 * @author David.Wei
+	 * @date 2008-4-11
+	 * @return void
 	 */
 	public void DOM() {
 		long lasting = System.currentTimeMillis();
@@ -53,7 +64,8 @@ public class MyXMLReader extends DefaultHandler {
 				System.out.println("||Space:  |"
 						+ doc.getElementsByTagName("space").item(i)
 								.getFirstChild().getNodeValue());
-				System.out.println("-------------------------------------------------");			}
+//				System.out.println("-------------------------------------------------");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -61,14 +73,53 @@ public class MyXMLReader extends DefaultHandler {
 				+ (System.currentTimeMillis() - lasting) + " MS");
 	}
 
-	
+	/**
+	 * DOM方式
+	 * 
+	 * @author hex
+	 * @date 2014-8-17
+	 * @return void
+	 */
+	public void DOM2() {
+		long lasting = System.currentTimeMillis();
+		XMLStreamReader reader = null;
+		BufferedInputStream stream = null;
+		File file = new File("xmltest.xml");
+		XMLInputFactory factory = XMLInputFactory.newInstance();
+		try {
+			stream = new BufferedInputStream(new FileInputStream(file));
+			reader = factory.createXMLStreamReader(stream);
+			while (reader.hasNext()) {
+				int eventType = reader.next();
+				if (eventType == XMLStreamReader.START_ELEMENT) {
+					String elementName = reader.getName().toString();
+
+					if (elementName.equals("name")) {
+						System.out.println("|| Name:  |"
+								+ reader.getElementText());
+					} else if (elementName.equals("space")) {
+						System.out.println("||Space:  |"
+								+ reader.getElementText());
+					}
+				}
+				// System.out.println("-------------------------------------------------");
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (XMLStreamException e) {
+			e.printStackTrace();
+		}
+		System.out.println("DOM2 RUNTIME："
+				+ (System.currentTimeMillis() - lasting) + " MS");
+	}
 
 	/**
 	 * SAX方式
-	* @since V2.0
-	* @author David.Wei
-	* @date 2008-4-11
-	* @return void
+	 * 
+	 * @since V2.0
+	 * @author David.Wei
+	 * @date 2008-4-11
+	 * @return void
 	 */
 	public void SAX() {
 
@@ -99,15 +150,16 @@ public class MyXMLReader extends DefaultHandler {
 		if (tag.equals("space")) {
 			System.out.println("||Space:  |" + new String(ch, start, length));
 		}
-		System.out.println("-------------------------------------------------");
+		// System.out.println("-------------------------------------------------");
 	}
 
 	/**
 	 * JDOM方式
-	* @since V2.0
-	* @author David.Wei
-	* @date 2008-4-11
-	* @return void
+	 * 
+	 * @since V2.0
+	 * @author David.Wei
+	 * @date 2008-4-11
+	 * @return void
 	 */
 	public void JDOM() {
 		long lasting = System.currentTimeMillis();
@@ -123,7 +175,8 @@ public class MyXMLReader extends DefaultHandler {
 				System.out.println("||Space:  |"
 						+ ((Element) allChildren.get(i)).getChild("space")
 								.getText());
-				System.out.println("-------------------------------------------------");			}
+//				System.out.println("-------------------------------------------------");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -133,10 +186,11 @@ public class MyXMLReader extends DefaultHandler {
 
 	/**
 	 * DOM4J方式
-	* @since V2.0
-	* @author David.Wei
-	* @date 2008-4-11
-	* @return void
+	 * 
+	 * @since V2.0
+	 * @author David.Wei
+	 * @date 2008-4-11
+	 * @return void
 	 */
 	public void DOM4J() {
 		long lasting = System.currentTimeMillis();
@@ -150,7 +204,7 @@ public class MyXMLReader extends DefaultHandler {
 				foo = (org.dom4j.Element) i.next();
 				System.out.println("|| Name:  |" + foo.elementText("name"));
 				System.out.println("||Space:  |" + foo.elementText("space"));
-				System.out.println("-------------------------------------------------");
+//				System.out.println("-------------------------------------------------");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -163,6 +217,8 @@ public class MyXMLReader extends DefaultHandler {
 		MyXMLReader myXML = new MyXMLReader();
 		System.out.println("=====================DOM=========================");
 		myXML.DOM();
+		System.out.println("=====================DOM2========================");
+		myXML.DOM2();
 		System.out.println("=====================SAX=========================");
 		myXML.SAX();
 		System.out.println("=====================JDOM========================");
