@@ -13,26 +13,26 @@ public class Test {
 		regex("abc", "...");
 		// 将任何是a--z的字符串长度为3的字符匹配
 		regex("abc", "[a-z]{3}");
-		
-		//初步认识. * + ?
-		//  .              任何字符
-		regex("a",".");//true
-		// a?             a一次或一次也没有
-		regex("aaaa","a?");//false
-		regex("","a?");//true
-		regex("a","a?");//true
-		// a*             a零次或多次
-		regex("aaaa","a*");//true
-		regex("","a*");//true
-		// a+            a一次或多次
-		regex("aaaa","a+");//true
-		// a{n}      a恰好 n 次
-		// a{n,}       a至少n次 
-		// a{n,m}   a至少n次，但是不超过m次
-		regex("1232435463685899","\\d{3,100}");//true
-		regex("192.168.0.1","\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}");//false
-		regex("192","[0-2][0-9][0-9]");//true
-		
+
+		// 初步认识. * + ?
+		// . 任何字符
+		regex("a", ".");// true
+		// a? a一次或一次也没有
+		regex("aaaa", "a?");// false
+		regex("", "a?");// true
+		regex("a", "a?");// true
+		// a* a零次或多次
+		regex("aaaa", "a*");// true
+		regex("", "a*");// true
+		// a+ a一次或多次
+		regex("aaaa", "a+");// true
+		// a{n} a恰好 n 次
+		// a{n,} a至少n次
+		// a{n,m} a至少n次，但是不超过m次
+		regex("1232435463685899", "\\d{3,100}");// true
+		regex("192.168.0.1", "\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}");// false
+		regex("192", "[0-2][0-9][0-9]");// true
+
 		// [abc] a、b 或 c（简单类）
 		// [^abc] 任何字符，除了 a、b 或 c（否定）
 		// [a-zA-Z] a 到 z 或 A 到 Z，两头的字母包括在内（范围）
@@ -40,16 +40,16 @@ public class Test {
 		// [a-z&&[def]] d、e 或 f（交集）
 		// [a-z&&[^bc]] a 到 z，除了 b 和 c：[ad-z]（减去）
 		// [a-z&&[^m-p]] a 到 z，而非 m 到 p：[a-lq-z]（减去）
-		
-		//范围
+
+		// 范围
 		System.out.println("***范围***");
 		regex("a", "[abc]");// true
 		regex("a", "[^abc]");// false
 		regex("A", "[a-zA-Z]");// true
 		regex("A", "[a-z]|[A-Z]");// true
 		regex("A", "[a-z[A-Z]]");// true
-		regex("R", "[A-Z&&[RFG]]");// true 
-		
+		regex("R", "[A-Z&&[RFG]]");// true
+
 		// \d 数字：[0-9]
 		// \D 非数字： [^0-9]
 		// \s 空白字符：[ \t\n\x0B\f\r]
@@ -63,7 +63,7 @@ public class Test {
 		regex("a_8 ", "\\w(3)");// false
 		regex("abc888&^#%", "[a-z]{1,3}\\d+[&^#%]+");// true
 		regex("\\", "\\\\");// true
-		
+
 		// 边界匹配器
 		// ^ 行的开头
 		// $ 行的结尾
@@ -73,16 +73,16 @@ public class Test {
 		// \G 上一个匹配的结尾
 		// \Z 输入的结尾，仅用于最后的结束符（如果有的话）
 		// \z 输入的结尾
-		
-		 //边界匹配
+
+		// 边界匹配
 		System.out.println("***边界匹配***");
-		regex("hello sir","^h.*");//true
-		regex("hello sir",".*ir$");//true
-		regex("hello sir","^h[a-z]{1,3}o\\b.*");//true
-		regex("hellosir","^h[a-z]{1,3}o\\b.*");//false
-        //空白行:一个或多个(空白并且非换行符)开头，并以换行符结尾
-		regex(" \n","^[\\s&&[^\\n]]*\\n$");//true
- 
+		regex("hello sir", "^h.*");// true
+		regex("hello sir", ".*ir$");// true
+		regex("hello sir", "^h[a-z]{1,3}o\\b.*");// true
+		regex("hellosir", "^h[a-z]{1,3}o\\b.*");// false
+		// 空白行:一个或多个(空白并且非换行符)开头，并以换行符结尾
+		regex(" \n", "^[\\s&&[^\\n]]*\\n$");// true
+
 	}
 
 	public static void p(Object o) {
