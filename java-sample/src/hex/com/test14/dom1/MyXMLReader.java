@@ -1,4 +1,4 @@
-package hex.com.test14.dom;
+package hex.com.test14.dom1;
 
 import java.io.BufferedInputStream;
 import java.io.File;
