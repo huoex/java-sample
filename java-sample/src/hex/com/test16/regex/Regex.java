@@ -3,7 +3,7 @@ package hex.com.test16.regex;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Test {
+public class Regex {
 
 	public static void main(String[] args) {
 
@@ -82,6 +82,25 @@ public class Test {
 		regex("hellosir", "^h[a-z]{1,3}o\\b.*");// false
 		// 空白行:一个或多个(空白并且非换行符)开头，并以换行符结尾
 		regex(" \n", "^[\\s&&[^\\n]]*\\n$");// true
+		
+		// 自定义能够匹配 '多种字符' 的表达式
+		// 使用方括号 [ ] 包含一系列字符，能够匹配其中任意一个字符。
+		// 用 [^ ] 包含一系列字符，则能够匹配其中字符之外的任意一个字符。同样的道理，
+		// 虽然可以匹配其中任意一个，但是只能是一个，不是多个。
+		
+		regex("a", "[ab5@]");
+		
+		find("abc123","[abc][abc]");
+		find("It costs $12.5","\\d+\\.?\\d*");
+		// 贪婪匹配：a.*b匹配所有
+		find("aabbacbaeb","a.*b");
+		// 懒惰匹配：a.*?b配以匹配aab,acb,aeb
+		find("aabbacbaeb","a.*?b");
+		// 侵占匹配：a.*+b则所有字符串都被.*优先匹配并吃掉，结果b无法匹配出现匹配为空
+		find("aabbacbaeb","a.*+b");
+		
+		find("<a href=\"http://abc.com\"><img src=\"def\" name=\"123\" /></a>","<a\\shref=\"(http://[A-Za-z0-9\\./]+?)\"><img\\ssrc=\"(.*?)\"\\sname=\"(.*?)\"\\s/></a>");
+		
 
 	}
 
@@ -93,9 +112,16 @@ public class Test {
 		// 模式类：字符串要被匹配的这么一个模式，该模式本身已经被编译过，使用的话效率要高很多。
 		Pattern pattern = Pattern.compile(p);
 		// 匹配类：这个模式匹配某个字符串所产生的结果，这个结果可能会有很多个。
-		Matcher m = pattern.matcher(s);
+		Matcher matcher = pattern.matcher(s);
 		System.out.println("\"" + s + "\"" + ".matches(\"" + p + "\")" + ":"
-				+ m.matches());
+				+ matcher.matches());
 	}
-
+	
+	public static void find(String s, String p) {
+		Pattern pattern = Pattern.compile(p);
+		Matcher matcher = pattern.matcher(s);
+		if (matcher.find())
+			System.out.println("\"" + s + "\"" + ".find(\"" + p + "\")" + ":"
+					+ matcher.group());
+	}
 }
