@@ -6,6 +6,10 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * 在一个执行器中删除一个任务
+ *
+ */
 public class Task implements Callable<String> {
 
 	/**
